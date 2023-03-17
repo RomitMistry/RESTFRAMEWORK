@@ -27,9 +27,9 @@
 		<property name="driverClassName"
 			value="com.mysql.cj.jdbc.Driver" />
 		<property name="url"
-			value="jdbc:mysql://localhost:3306/springmvc" />
+			value="jdbc:mysql://localhost:3306/springproject" />
 		<property name="username" value="root" />
-		<property name="password" value="" />
+		<property name="password" value="Finally" />
 	</bean>
 
 	<bean

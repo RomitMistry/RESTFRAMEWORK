@@ -3,13 +3,18 @@ package com.controllerclass;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.catalina.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 
@@ -23,11 +28,6 @@ public class controller {
 
 	@RequestMapping("/about")
 	public String about(HttpServletRequest request) {
-
-		/*
-		 * request.setAttribute("school", "MY SCHOOL NAME IS DIVINE BUDS SCHOOL");
-		 * request.setAttribute("course", "PROGRAMING LANGUAGE JAVA");
-		 */
 
 		return "about";
 	}
@@ -52,27 +52,22 @@ public class controller {
 		dao.insertuser(m);
 
 		RedirectView view = new RedirectView();
-		view.setUrl(request.getContextPath() + "/");
+		view.setUrl(request.getContextPath() + "/login");
 		return view;
 	}
 
-	@RequestMapping(value = "/update/{id}")
-	public ModelAndView getUser(@PathVariable int id) {
-		System.out.println("update called : " + id);
-		model m = dao.getUserById(id);
-		ModelAndView view = new ModelAndView();
-		view.addObject("data", m);
-		view.setViewName("update");
-		return view;
+	@RequestMapping("/login" )
+	public ModelAndView showlogin (HttpServletRequest request , HttpServletResponse response)) {
+		ModelAndView mav = new ModelAndView("login");
+		mav.addObject("login" ,  new model());
+		return mav;
 	}
 
-	@RequestMapping(value = "/delete/{id}")
-	public RedirectView deleteUser(@PathVariable int id, HttpServletRequest request) {
-		model u = dao.getUserById(id);
-		dao.deleteUser(u);
-		RedirectView view = new RedirectView();
-		view.setUrl(request.getContextPath() + "/");
-		return view;
-	}
+	@RequestMapping ("/loginuser" )
+	public ModelAndView loginuser (HttpServletRequest request , HttpServletResponse response ,  @ModelAttribute("login") model login)
+	
+	ModelAndView mav = null;
 
+	
+	
 }
